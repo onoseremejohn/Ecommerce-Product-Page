@@ -1,0 +1,263 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+
+/*
+Variables
+*/
+
+:root {
+  --ff-primary: "Kumbh Sans", sans-serif;
+  --ff-secondary: "Open Sans", sans-serif;
+
+  --fw-reg: 300;
+  --fw-bold: 900;
+
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-h4: 1rem;
+  --fs-body: 1rem;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+
+  --line-height: 1.15;
+  --spacing: 0.1rem;
+  --transition: all 0.3s linear;
+  --max-width: 1170px;
+  --fixed-width: 620px;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 4.5rem;
+    --fs-h2: 3.75rem;
+    --fs-h3: 1.5rem;
+    --fs-h4: 1.125rem;
+    --fs-body: 1.125rem;
+    --line-height: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* background: var(--clr-light); */
+  /* color: var(--clr-dark); */
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1;
+  transition: var(--transition);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+:focus {
+  /* outline: 3px solid var(--clr-accent); */
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: var(--line-height);
+  /* margin-bottom: 0.75rem; */
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+h2 {
+  font-size: var(--fs-h2);
+}
+h3 {
+  font-size: var(--fs-h3);
+}
+h4 {
+  font-size: var(--fs-h4);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 2.5em;
+  /* background: var(--clr-accent); */
+  /* color: var(--clr-dark); */
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: var(--fw-bold);
+  transition: transform 300ms ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.icon {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 2em;
+  height: 2em;
+  padding: 0em;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.nav {
+  padding: 1.5em;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 80px;
+}
+
+.left {
+  display: flex;
+}
+
+.push-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: 0.5em;
+}
+
+.logo a {
+  width: 100%;
+  height: 100%;
+}
+
+.links {
+  display: none;
+}
+
+.links a {
+  text-transform: capitalize;
+}
+
+.sidebar-header {
+  justify-self: end;
+  padding: 1em 0em;
+}
+
+.close {
+  height: 3em;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 65vw;
+  height: 100%;
+  z-index: 100;
+  background-color: pink;
+  display: grid;
+  grid-template-rows: 50px 1fr auto;
+  transition: var(--transition);
+  transform: translateX(-100%);
+}
+
+.show-sidebar {
+  transform: translateX(0);
+}
+
+.sidebar-links a {
+  color: black;
+  display: block;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  padding: 1em 1.5em;
+  transition: var(--transition);
+}
+
+.sidebar-links a:hover {
+  /* background: var(--clr-primary-8);
+  color: var(--clr-primary-5); */
+  padding-left: 2em;
+}
+
+.social-icons {
+  display: flex;
+  justify-self: center;
+  padding-bottom: 2em;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  color: black;
+  transition: var(--transition);
+}
+.social-icons a:hover {
+  /* color: var(--clr-primary-1); */
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggler {
+    display: none;
+  }
+  .nav {
+    display: grid;
+    grid-template-columns: auto 80px;
+    padding: 2.3em;
+    border-bottom: 1px solid red;
+  }
+
+  .left .logo {
+    flex-shrink: 0;
+  }
+
+  .left .links {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 1em;
+  }
+  .links li {
+    font-size: var(--fs-h3);
+  }
+}
+
+@media screen and (min-width: 1170px) {
+  .nav {
+    padding: 2.3em 0 2.3em 0;
+  }
+}
