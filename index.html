@@ -203,7 +203,7 @@
                   <use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#a" />
                 </svg>
               </button>
-              <span>0</span>
+              <span id="number">0</span>
               <button type="button" class="plus icon">
                 <svg
                   width="12"
@@ -449,8 +449,9 @@
     <div class="cart-div">
       <h4>Cart</h4>
       <div class="cart-div-hr"></div>
-      <div class="cart-div-not-empty">
-        <li class="cart-div-item">
+      <div class="cart-div-empty">
+        <p>Your cart is empty</p>
+        <!-- <li class="cart-div-item">
           <img
             class="cart-div-item-thumbnail"
             src="./images/image-product-1-thumbnail.jpg"
@@ -458,13 +459,13 @@
           />
           <div class="cart-div-item-name">
             <p>Fall Limited Edition Sneakers autumn ji</p>
-            <p>$125.00 x 3 $375.00</p>
+            <p>$125.00 x <span class='kz'>3</span><span> $375.00</span></p>
           </div>
           <button type="button" class="cart-div-item-trash">
             <img src="./images/icon-delete.svg" alt="X" />
           </button>
-        </li>
-        <li class="cart-div-item">
+        </li> -->
+        <!-- <li class="cart-div-item">
           <img
             class="cart-div-item-thumbnail"
             src="./images/image-product-2-thumbnail.jpg"
@@ -515,10 +516,27 @@
             <img src="./images/icon-delete.svg" alt="X" />
           </button>
         </li>
-        <button type="button" class="checkout btn">
-          <p>Checkout</p>
-        </button>
+        <li class="cart-div-item">
+          <img
+            class="cart-div-item-thumbnail"
+            src="./images/image-product-2-thumbnail.jpg"
+            alt=""
+          />
+          <div class="cart-div-item-name">
+            <p>
+              Fall jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjLimited Edition Sneakers
+              autumn ji
+            </p>
+            <p>$125.00 x 3 $375.00</p>
+          </div>
+          <button type="button" class="cart-div-item-trash">
+            <img src="./images/icon-delete.svg" alt="X" />
+          </button>
+        </li> -->
       </div>
+      <!-- <button type="button" class="checkout btn">
+        <p>Checkout</p>
+      </button> -->
     </div>
     <script src="./js/app.js"></script>
   </body>

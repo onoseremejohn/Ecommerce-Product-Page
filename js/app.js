@@ -36,31 +36,27 @@ prev.addEventListener("click", () => {
 const lightbox = document.getElementById("lightbox");
 const lightboxPrev = lightbox.querySelector(".lightbox-prev");
 const lightboxNext = lightbox.querySelector(".lightbox-next");
-// const lightboxSlide = lightbox.querySelector(".lightbox-slide");
 const closeLightbox = document.querySelector(".lightbox-close");
 
-const products = [
-  {
-    id: 1,
-    title: "sneakers",
-    category: "men",
-    imgs: [
-      "./images/image-product-1.jpg",
-      "./images/image-product-2.jpg",
-      "./images/image-product-3.jpg",
-      "./images/image-product-4.jpg",
-    ],
-    thumbnails: [
-      "./images/image-product-1-thumbnail.jpg",
-      "./images/image-product-2-thumbnail.jpg",
-      "./images/image-product-3-thumbnail.jpg",
-      "./images/image-product-4-thumbnail.jpg",
-    ],
-  },
-];
-// const closeLightbox = document.querySelector(".lightbox-close");
-// lightbox.id = "lightbox";
-// document.body.appendChild(lightbox);
+// const products = [
+//   {
+//     id: 1,
+//     title: "sneakers",
+//     category: "men",
+//     imgs: [
+//       "./images/image-product-1.jpg",
+//       "./images/image-product-2.jpg",
+//       "./images/image-product-3.jpg",
+//       "./images/image-product-4.jpg",
+//     ],
+//     thumbnails: [
+//       "./images/image-product-1-thumbnail.jpg",
+//       "./images/image-product-2-thumbnail.jpg",
+//       "./images/image-product-3-thumbnail.jpg",
+//       "./images/image-product-4-thumbnail.jpg",
+//     ],
+//   },
+// ];
 
 const thumbnails = document.querySelectorAll(".thumbnail");
 
@@ -196,4 +192,118 @@ closeLightbox.addEventListener("click", () => {
   lightbox.classList.remove("active");
 });
 
-prev.addEventListener("click", () => {});
+const plus = document.querySelector(".plus");
+const minus = document.querySelector(".minus");
+const numVal = document.getElementById("number");
+const addToCart = document.querySelector(".add-to-cart");
+const cartDiv = document.querySelector(".cart-div");
+const cartIcon = document.querySelector(".cart");
+
+cartIcon.addEventListener("click", (e) => {
+  cartDiv.classList.toggle("cart-div-active");
+  e.stopPropagation();
+});
+
+cartDiv.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
+window.addEventListener("click", () => {
+  cartDiv.classList.remove("cart-div-active");
+});
+
+plus.addEventListener("click", () => {
+  let number = document.getElementById("number").textContent;
+  number++;
+  numVal.textContent = number;
+});
+
+minus.addEventListener("click", () => {
+  let number = document.getElementById("number").textContent;
+  number--;
+  if (number < 0) {
+    number = 0;
+  }
+  numVal.textContent = number;
+});
+
+addToCart.addEventListener("click", () => {
+  let number = document.getElementById("number").textContent;
+  number = parseInt(number);
+  if (number !== 0) {
+    updateCart(number);
+    numVal.textContent = "0";
+  }
+});
+
+function updateCart(number) {
+  const empty = cartDiv.querySelector(".cart-div-empty");
+  if (empty) {
+    empty.remove();
+    const button = document.createElement("button");
+    button.classList.add("checkout", "btn");
+    const attr = document.createAttribute("type");
+    attr.value = "button";
+    button.setAttributeNode(attr);
+    button.innerHTML = `<p>Checkout</p>`;
+    const element = document.createElement("div");
+    element.classList.add("cart-div-not-empty");
+    element.innerHTML = `<li class="cart-div-item">
+          <img
+            class="cart-div-item-thumbnail"
+            src="./images/image-product-1-thumbnail.jpg"
+            alt=""
+          />
+          <div class="cart-div-item-name">
+            <p>Fall Limited Edition Sneakers</p>
+            <p>$125.00 x <span class='kz'>${number}</span><span> $${
+      number * 125
+    }.00</span></p>
+          </div>
+          <button type="button" class="cart-div-item-trash">
+            <img src="./images/icon-delete.svg" alt="X" />
+          </button>
+        </li>`;
+
+    cartDiv.appendChild(element);
+    cartDiv.appendChild(button);
+    const trashBtn = element.querySelector(".cart-div-item-trash");
+    trashBtn.addEventListener("click", trashItem);
+  } else {
+    let a = cartDiv.querySelector(".kz").textContent;
+    a = parseInt(a);
+    let rep = cartDiv.querySelector(".cart-div-not-empty");
+    const element = document.createElement("div");
+    element.classList.add("cart-div-not-empty");
+    element.innerHTML = `<li class="cart-div-item">
+          <img
+            class="cart-div-item-thumbnail"
+            src="./images/image-product-1-thumbnail.jpg"
+            alt=""
+          />
+          <div class="cart-div-item-name">
+            <p>Fall Limited Edition Sneakers</p>
+            <p>$125.00 x <span class='kz'>${a + number}</span><span> $${
+      (a + number) * 125
+    }.00</span></p>
+          </div>
+          <button type="button" class="cart-div-item-trash">
+            <img src="./images/icon-delete.svg" alt="X" />
+          </button>
+        </li>`;
+
+    cartDiv.replaceChild(element, rep);
+    const trashBtn = element.querySelector(".cart-div-item-trash");
+    trashBtn.addEventListener("click", trashItem);
+  }
+}
+
+const trashItem = () => {
+  let remove = cartDiv.querySelector(".cart-div-not-empty");
+  let checkout = cartDiv.querySelector(".checkout");
+  cartDiv.removeChild(checkout);
+  const element = document.createElement("div");
+  element.classList.add("cart-div-empty");
+  element.innerHTML = `<p>Your cart is empty</p>`;
+  cartDiv.replaceChild(element, remove);
+};
