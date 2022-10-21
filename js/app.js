@@ -3,10 +3,40 @@ const sidebar = document.querySelector(".sidebar");
 const closeSidebar = document.querySelector(".close");
 const sidebarLinks = document.querySelectorAll(".sidebar-links a");
 
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+const mobileSlides = document.querySelectorAll(".image");
+let mobileCounter = 0;
+
+const mobileCarousel = () => {
+  if (mobileCounter === mobileSlides.length) {
+    mobileCounter = 0;
+  }
+  if (mobileCounter < 0) {
+    mobileCounter = mobileSlides.length - 1;
+  }
+  mobileSlides.forEach((slide) => {
+    slide.style.transform = `translateX(-${mobileCounter * 100}%)`;
+  });
+};
+
+mobileSlides.forEach((slide, index) => {
+  slide.style.left = `${index * 100}%`;
+});
+next.addEventListener("click", () => {
+  mobileCounter++;
+  mobileCarousel();
+});
+
+prev.addEventListener("click", () => {
+  mobileCounter--;
+  mobileCarousel();
+});
+
 const lightbox = document.getElementById("lightbox");
 const lightboxPrev = lightbox.querySelector(".lightbox-prev");
 const lightboxNext = lightbox.querySelector(".lightbox-next");
-const lightboxSlide = lightbox.querySelector(".lightbox-slide");
+// const lightboxSlide = lightbox.querySelector(".lightbox-slide");
 const closeLightbox = document.querySelector(".lightbox-close");
 
 const products = [
@@ -66,10 +96,6 @@ thumbnails.forEach((thumbnail) => {
     // displayLightbox(img, t1, t2, t3, t4);
   });
 });
-
-// closeLightbox.addEventListener("click", (e) => {
-//   lightbox.classList.remove("active");
-// });
 
 function displayLightbox(img, t1, t2, t3, t4) {
   lightbox.innerHTML = `<div class="lightbox-container">
@@ -169,3 +195,5 @@ lightboxThumbnails.forEach((nail, index) => {
 closeLightbox.addEventListener("click", () => {
   lightbox.classList.remove("active");
 });
+
+prev.addEventListener("click", () => {});
