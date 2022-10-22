@@ -2,6 +2,7 @@ const navToggler = document.querySelector(".nav-toggler");
 const sidebar = document.querySelector(".sidebar");
 const closeSidebar = document.querySelector(".close");
 const sidebarLinks = document.querySelectorAll(".sidebar-links a");
+const shadow = document.getElementById("shadow");
 
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
@@ -61,14 +62,15 @@ const closeLightbox = document.querySelector(".lightbox-close");
 const thumbnails = document.querySelectorAll(".thumbnail");
 
 navToggler.addEventListener("click", function (e) {
+  cartDiv.classList.remove("cart-div-active");
+  shadow.classList.add("active-shadow");
   sidebar.classList.toggle("show-sidebar");
-  //   document.body.style.background = "rgba(0, 0, 0, .5)";
   e.stopPropagation();
 });
 
 function hideSidebar() {
+  shadow.classList.remove("active-shadow");
   sidebar.classList.remove("show-sidebar");
-  //   document.body.style.background = "#ffffff";
 }
 
 closeSidebar.addEventListener("click", hideSidebar);
@@ -201,6 +203,7 @@ const cartIcon = document.querySelector(".cart");
 
 cartIcon.addEventListener("click", (e) => {
   cartDiv.classList.toggle("cart-div-active");
+  hideSidebar();
   e.stopPropagation();
 });
 
@@ -307,3 +310,7 @@ const trashItem = () => {
   element.innerHTML = `<p>Your cart is empty</p>`;
   cartDiv.replaceChild(element, remove);
 };
+
+window.addEventListener("scroll", () => {
+  cartDiv.classList.remove("cart-div-active");
+});
