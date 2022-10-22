@@ -75,7 +75,7 @@ function hideSidebar() {
 
 closeSidebar.addEventListener("click", hideSidebar);
 
-window.addEventListener("click", hideSidebar);
+shadow.addEventListener("click", hideSidebar);
 
 sidebar.addEventListener("click", function (e) {
   e.stopPropagation();
